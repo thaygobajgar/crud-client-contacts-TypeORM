@@ -1,8 +1,8 @@
 import express, { Application } from "express";
-import handleError from "./errors/handlerError";
+import handleErrors from "./errors/handlerError";
 
 const app: Application = express();
 app.use(express.json());
-app.use(handleError);
+app.use(handleErrors);
 
 export default app;

@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { AppError } from "./AppError";
 
-const handleError = async (
+const handleErrors = async (
   err: Error,
   req: Request,
   res: Response,
@@ -20,4 +20,4 @@ const handleError = async (
   });
 };
 
-export default handleError;
+export default handleErrors;
