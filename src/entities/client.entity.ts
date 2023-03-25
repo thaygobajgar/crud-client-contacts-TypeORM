@@ -5,8 +5,10 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
-  Timestamp,
+  BeforeInsert,
+  BeforeUpdate,
 } from "typeorm";
+import { getRounds, hashSync } from "bcryptjs";
 
 @Entity("clients")
 class Client {
@@ -14,7 +16,7 @@ class Client {
   id: string;
 
   @Column({ length: 50 })
-  firtsName: string;
+  firstName: string;
 
   @Column({ length: 50 })
   lastName: string;
@@ -24,9 +26,23 @@ class Client {
 
   @Column({ length: 127 })
   password: string;
+  @BeforeInsert()
+  @BeforeUpdate()
+  hashPassword() {
+    const isEncrypted = getRounds(this.password);
+    if (!isEncrypted) {
+      this.password = hashSync(this.password, 10);
+    }
+  }
 
   @Column({ length: 14 })
   phone: string;
+
+  @Column({ default: true })
+  isActive: boolean;
+
+  @Column({ default: false })
+  isAdm: boolean;
 
   @CreateDateColumn()
   createdAt: Date;

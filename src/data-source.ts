@@ -2,8 +2,9 @@ import "dotenv/config";
 import "reflect-metadata";
 import { DataSource, DataSourceOptions } from "typeorm";
 import path from "path";
-import { Client } from "./entities/client.entity";
-import { createClient1679593960031 } from "./migrations/1679593960031-createClient";
+import { Client } from "./entities";
+import { createClient1679708074123 } from "./migrations/1679708074123-createClient";
+
 const dataSourceConfig = (): DataSourceOptions => {
   const dbUrl: string | undefined = process.env.DATABASE_URL;
 
@@ -27,7 +28,7 @@ const dataSourceConfig = (): DataSourceOptions => {
     url: dbUrl,
     synchronize: false,
     logging: true,
-    migrations: [createClient1679593960031],
+    migrations: [createClient1679708074123],
     entities: [Client],
   };
 };
