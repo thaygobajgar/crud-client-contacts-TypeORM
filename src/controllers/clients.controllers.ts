@@ -9,9 +9,8 @@ import {
 
 const createClientController = async (
   req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+  res: Response
+): Promise<Response> => {
   const clientData: IClient = req.body;
 
   const newClient = await createClientService(clientData);
@@ -21,26 +20,24 @@ const createClientController = async (
 
 const listClientsController = async (
   req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+  res: Response
+): Promise<Response> => {
   const clients = await listClientsService();
   return res.status(201).json(clients);
 };
 
 const deleteClientController = async (
   req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+  res: Response
+): Promise<Response> => {
   await deleteClientService(req.params.id);
   return res.status(204).json();
 };
+
 const updateClientController = async (
   req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+  res: Response
+): Promise<Response> => {
   const clientData: IClientUpdate = req.body;
   const clientId: string = req.params.id;
   const updatedClient = await updateClientService(clientId, clientData);

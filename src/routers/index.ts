@@ -1,3 +1,4 @@
 import clientRoutes from "./client.routes";
 import sessionRoutes from "./session.routes";
-export { clientRoutes, sessionRoutes };
+import contactRoutes from "./contact.routes";
+export { clientRoutes, sessionRoutes, contactRoutes };
