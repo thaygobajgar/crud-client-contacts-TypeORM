@@ -4,6 +4,13 @@ import {
   multipleClientsReturnSchema,
   clientUpdateSchema,
 } from "./client.schema";
+import {
+  contactReturnSchema,
+  contactSchema,
+  contactUpdateSchema,
+  multipleContactsReturnSchema,
+  returnContactsByClientSchema,
+} from "./contact.schema";
 import { createSessionSchema } from "./session.schemas";
 
 export {
@@ -12,4 +19,9 @@ export {
   multipleClientsReturnSchema,
   clientUpdateSchema,
   createSessionSchema,
+  contactReturnSchema,
+  contactSchema,
+  contactUpdateSchema,
+  multipleContactsReturnSchema,
+  returnContactsByClientSchema,
 };
