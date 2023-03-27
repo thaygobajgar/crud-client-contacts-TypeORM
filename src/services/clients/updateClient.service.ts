@@ -10,13 +10,18 @@ const updateClientService = async (
 ): Promise<IClientReturn> => {
   const clientRepository: Repository<Client> =
     AppDataSource.getRepository(Client);
+
   const findClient = await clientRepository.findOneBy({ id: clientId });
+
   const client = clientRepository.create({
     ...findClient,
     ...clientData,
   });
+
   await clientRepository.save(client);
+
   const updatedClient = clientReturnSchema.parse(client);
+
   return updatedClient;
 };
 

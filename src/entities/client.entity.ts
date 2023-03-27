@@ -7,8 +7,10 @@ import {
   DeleteDateColumn,
   BeforeInsert,
   BeforeUpdate,
+  OneToMany,
 } from "typeorm";
 import { getRounds, hashSync } from "bcryptjs";
+import { Contact } from "./contact.entity";
 
 @Entity("clients")
 class Client {
@@ -52,6 +54,9 @@ class Client {
 
   @DeleteDateColumn()
   deletedAt: Date;
+
+  @OneToMany(() => Contact, (contact) => contact.client)
+  contacts: Contact[];
 }
 
 export { Client };

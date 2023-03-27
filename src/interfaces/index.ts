@@ -4,13 +4,23 @@ import {
   IClientsReturn,
   IClientUpdate,
 } from "./client.interfaces";
-import { ISession, ISessionRes } from "./session.interfaces";
-
+import { ISession } from "./session.interfaces";
+import {
+  IContact,
+  IContactReturn,
+  IContactUpdate,
+  IContactsReturn,
+  IContactsByUser,
+} from "./contact.interfaces";
 export {
   IClient,
   IClientReturn,
   IClientsReturn,
   IClientUpdate,
   ISession,
-  ISessionRes,
+  IContact,
+  IContactReturn,
+  IContactUpdate,
+  IContactsReturn,
+  IContactsByUser,
 };
