@@ -3,6 +3,8 @@ import {
   listClientsController,
   deleteClientController,
   updateClientController,
+  listClientByIdController,
+  showProfileController,
 } from "./clients.controllers";
 import { createSessionController } from "./session.controllers";
 import {
@@ -21,4 +23,6 @@ export {
   listContactsController,
   listContactsByClientController,
   updateContactController,
+  listClientByIdController,
+  showProfileController,
 };
