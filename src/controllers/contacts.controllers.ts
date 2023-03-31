@@ -6,6 +6,7 @@ import {
   listContactsByClientService,
   listContactsService,
   updateContactService,
+  deleteContactService,
 } from "../services/contacts";
 
 const createContactController = async (
@@ -44,9 +45,19 @@ const updateContactController = async (
   return res.json(updatedContact);
 };
 
+const deleteContactController = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const contactId: string = req.params.id;
+  await deleteContactService(contactId);
+  return res.status(204).json();
+};
+
 export {
   createContactController,
   listContactsController,
   listContactsByClientController,
   updateContactController,
+  deleteContactController,
 };

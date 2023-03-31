@@ -3,7 +3,9 @@ import { IClient, IClientUpdate } from "../interfaces";
 import {
   createClientService,
   deleteClientService,
+  listClientByIdService,
   listClientsService,
+  showProfileService,
   updateClientService,
 } from "../services/clients";
 
@@ -24,6 +26,26 @@ const listClientsController = async (
 ): Promise<Response> => {
   const clients = await listClientsService();
   return res.status(201).json(clients);
+};
+
+const listClientByIdController = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const clientId = req.params.id;
+  const client = await listClientByIdService(clientId);
+
+  return res.json(client);
+};
+
+const showProfileController = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const clientId = req.client.id;
+  const profile = await showProfileService(clientId);
+
+  return res.json(profile);
 };
 
 const deleteClientController = async (
@@ -49,4 +71,6 @@ export {
   listClientsController,
   deleteClientController,
   updateClientController,
+  listClientByIdController,
+  showProfileController,
 };

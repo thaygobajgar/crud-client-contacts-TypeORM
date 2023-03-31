@@ -23,7 +23,7 @@ class Contact {
   @Column({ type: "varchar", length: 50, nullable: true })
   lastName?: string | undefined | null;
 
-  @Column({ length: 127, unique: true })
+  @Column({ length: 127 })
   email: string;
 
   @Column({ length: 14 })
