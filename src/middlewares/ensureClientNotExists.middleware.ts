@@ -14,7 +14,7 @@ const ensureClientDoNotExistsMiddleware = async (
 
   const findClient = await clientRepository.findOne({
     where: {
-      id: req.params.id,
+      email: req.body.email,
     },
   });
 
