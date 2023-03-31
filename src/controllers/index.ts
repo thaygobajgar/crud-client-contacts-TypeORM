@@ -12,6 +12,7 @@ import {
   listContactsController,
   listContactsByClientController,
   updateContactController,
+  deleteContactController,
 } from "./contacts.controllers";
 export {
   createClientController,
@@ -25,4 +26,5 @@ export {
   updateContactController,
   listClientByIdController,
   showProfileController,
+  deleteContactController,
 };

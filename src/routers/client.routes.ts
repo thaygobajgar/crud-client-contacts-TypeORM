@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+  ensureClientDoNotExistsMiddleware,
   ensureClientExistsMiddleware,
   ensureDataIsValidMiddleware,
   ensureIsOwnerOrAdminMiddleware,
@@ -27,6 +28,7 @@ clientRoutes.get(
 
 clientRoutes.delete(
   "/:id",
+  ensureTokenIsValidMiddleware,
   ensureClientExistsMiddleware,
   ensureIsOwnerOrAdminMiddleware,
   deleteClientController
@@ -34,6 +36,7 @@ clientRoutes.delete(
 
 clientRoutes.patch(
   "/:id",
+  ensureTokenIsValidMiddleware,
   ensureDataIsValidMiddleware(clientUpdateSchema),
   ensureClientExistsMiddleware,
   ensureIsOwnerOrAdminMiddleware,
@@ -43,6 +46,7 @@ clientRoutes.patch(
 clientRoutes.post(
   "",
   ensureDataIsValidMiddleware(clientSchema),
+  ensureClientDoNotExistsMiddleware,
   createClientController
 );
 
