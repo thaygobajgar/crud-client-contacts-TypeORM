@@ -118,7 +118,7 @@ O objeto User é definido como:
 
 [ Voltar para os Endpoints ](#5-endpoints)
 
-### `/cliens`
+### `/clients`
 
 ### Exemplo de Request:
 
