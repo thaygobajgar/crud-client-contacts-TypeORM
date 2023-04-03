@@ -85,8 +85,8 @@ yarn typeorm migration:run -d src/data-source.ts
 - [Clients](#1-clients)
   - [POST - /clients](#11-criação-de-cliente)
   - [GET - /clients/profile](#12-listar-cliente-por-token)
+- [Login](#13-login)
 - [Contacts](#2-contacts)
-- [Login](#3-login)
 
 ---
 
@@ -189,53 +189,7 @@ OBS.: Chaves não presentes no schema serão removidas.
 
 ---
 
-### 1.2. **Login do Client**
-
-[ Voltar aos Endpoints ](#5-endpoints)
-
-### `/login`
-
-### Exemplo de Request:
-
-```
-POST /login
-Host: localhost:3000
-Authorization: None
-Content-type: application/json
-```
-
-### Corpo da Requisição:
-
-```
-{
-	"email": "fulanob@mail.com",
-	"password": "Abc123!@#"
-}
-```
-
-### Exemplo de Response:
-
-```
-200 OK
-```
-
-```json
-[
-  {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbSI6ZmFsc2UsImlzQWN0aXZlIjp0cnVlLCJpYXQiOjE2ODAxMDMyMjIsImV4cCI6MTY4MDE4OTYyMiwic3ViIjoiMjhhODc2MjktMDI0Zi00NTZhLTk1YmUtN2Y4NDViZGJkM2E1In0.BvTJR3YYChAdc1vaexFPgjD_L4WcUBTjF4ibUM4e7N4"
-  }
-]
-```
-
-### Possíveis Erros:
-
-| Código do Erro  | Descrição       |
-| --------------- | --------------- |
-| 400 Bad Request | User not found. |
-
----
-
-### 1.3. **Listar Usuário por Token**
+### 1.2. **Listar Usuário por Token**
 
 [ Voltar aos Endpoints ](#5-endpoints)
 
@@ -294,3 +248,232 @@ Vazio
 | Código do Erro | Descrição       |
 | -------------- | --------------- |
 | 404 Not Found  | User not found. |
+
+---
+
+### 1.3. **Atualização de Cliente**
+
+[ Voltar para os Endpoints ](#5-endpoints)
+
+### `/clients`
+
+### Exemplo de Request:
+
+```
+PATCH /cliens
+Host: localhost:3000/
+Authorization: Bearer {token}
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+
+```json
+{
+  "firstName": "Fulano PATCHED"
+}
+```
+
+### Schema de Validação com Yup:
+
+```javascript
+  firstName: z.string().max(50).min(3),
+  lastName: z.string().max(50).min(3),
+  email: z.string().email().max(127).min(9),
+  password: z
+    .string()
+    .max(20)
+    .min(6)
+    .transform((pass) => {
+      return hashSync(pass, 10);
+    }),
+  phone: z.string().max(14).min(14),
+```
+
+OBS.: Chaves não presentes no schema serão removidas.
+
+### Exemplo de Response:
+
+```
+200 OK
+```
+
+```json
+{
+  "firstName": "Fulano PATCHED",
+  "lastName": "Beltrano",
+  "email": "fulanob@mail.com",
+  "phone": "+5511987654321",
+  "id": "a23527b6-d712-4629-9e7d-ae3493810909",
+  "createdAt": "2023-03-29T15:20:23.132Z",
+  "updatedAt": "2023-03-29T15:20:23.132Z",
+  "deletedAt": null,
+  "isAdm": false,
+  "isActive": true
+}
+```
+
+### Possíveis Erros:
+
+| Código do Erro | Descrição          |
+| -------------- | ------------------ |
+| 400 Conflict   | ""Invalid email"". |
+
+---
+
+### 1.4. **Deleção de Cliente**
+
+[ Voltar para os Endpoints ](#5-endpoints)
+
+### `/clients`
+
+### Exemplo de Request:
+
+```
+DELETE /cliens
+Host: localhost:3000/
+Authorization: Bearer {token}
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+
+```json
+{}
+```
+
+### Exemplo de Response:
+
+```
+204 No-content
+```
+
+### Possíveis Erros:
+
+| Código do Erro | Descrição           |
+| -------------- | ------------------- |
+| 404 Not Found  | "Client not Found". |
+
+---
+
+### 1.5. **Login do Client**
+
+[ Voltar aos Endpoints ](#5-endpoints)
+
+### `/login`
+
+### Exemplo de Request:
+
+```
+POST /login
+Host: localhost:3000
+Authorization: None
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+
+```
+{
+	"email": "fulanob@mail.com",
+	"password": "Abc123!@#"
+}
+```
+
+### Exemplo de Response:
+
+```
+200 OK
+```
+
+```json
+[
+  {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbSI6ZmFsc2UsImlzQWN0aXZlIjp0cnVlLCJpYXQiOjE2ODAxMDMyMjIsImV4cCI6MTY4MDE4OTYyMiwic3ViIjoiMjhhODc2MjktMDI0Zi00NTZhLTk1YmUtN2Y4NDViZGJkM2E1In0.BvTJR3YYChAdc1vaexFPgjD_L4WcUBTjF4ibUM4e7N4"
+  }
+]
+```
+
+### Possíveis Erros:
+
+| Código do Erro  | Descrição       |
+| --------------- | --------------- |
+| 400 Bad Request | User not found. |
+
+---
+
+### 1.6. **Criação de Contato**
+
+[ Voltar para os Endpoints ](#5-endpoints)
+
+### `/contacts`
+
+### Exemplo de Request:
+
+```
+POST /contacts
+Host: localhost:3000/
+Authorization: Bearer {token}
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+
+```json
+{
+  "firstName": "Ciclano",
+  "email": "ciclano@mail.com",
+  "phone": "+5511912345678"
+}
+```
+
+### Schema de Validação com Yup:
+
+```javascript
+  firstName: z.string().max(50).min(3),
+  lastName: z.string().max(50).min(3).notRequired(),
+  email: z.string().email().max(127).min(9),
+  phone: z.string().max(14).min(14),
+```
+
+OBS.: Chaves não presentes no schema serão removidas.
+
+### Exemplo de Response:
+
+```
+201 Created
+```
+
+```json
+{
+  "firstName": "Ciclano",
+  "lastName": null,
+  "email": "fulanob@mail.com",
+  "phone": "+5511912345678",
+  "id": "a23527b6-d712-4629-9e7d-ae3493810909",
+  "createdAt": "2023-03-29T15:20:23.132Z",
+  "updatedAt": "2023-03-29T15:20:23.132Z",
+  "deletedAt": null,
+  "client": {
+    "firstName": "Fulano",
+    "lastName": "Beltrano",
+    "email": "fulanob@mail.com",
+    "phone": "+5511987654321",
+    "id": "a23527b6-d712-4629-9e7d-ae3493810909",
+    "createdAt": "2023-03-29T15:20:23.132Z",
+    "updatedAt": "2023-03-29T15:20:23.132Z",
+    "deletedAt": null,
+    "isAdm": false,
+    "isActive": true
+  }
+}
+```
+
+### Possíveis Erros:
+
+| Código do Erro | Descrição                    |
+| -------------- | ---------------------------- |
+| 409 Conflict   | "Client already registered". |
+| 400 Conflict   | ""Invalid email"".           |
+
+---
