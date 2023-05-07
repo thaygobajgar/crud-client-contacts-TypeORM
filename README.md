@@ -8,6 +8,7 @@
   - [Instalando Dependências](#31-instalando-dependências)
   - [Variáveis de Ambiente](#32-variáveis-de-ambiente)
   - [Migrations](#33-migrations)
+  - [Iniciando API](#34-iniciando-servidor)
 - [Autenticação](#4-autenticação)
 - [Endpoints](#5-endpoints)
 
@@ -64,6 +65,14 @@ Execute as migrations com o comando:
 
 ```
 yarn typeorm migration:run -d src/data-source.ts
+```
+
+### 3.4. Iniciando servidor
+
+Execute a API com o comando:
+
+```
+yarn dev
 ```
 
 ---
