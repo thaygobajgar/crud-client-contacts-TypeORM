@@ -5,6 +5,7 @@ import path from "path";
 import { Client, Contact } from "./entities";
 import { createClient1679708074123 } from "./migrations/1679708074123-createClient";
 import { createContact1679767636330 } from "./migrations/1679767636330-createContact";
+import { removeUniqueContactEmail1680263853100 } from "./migrations/1680263853100-removeUniqueContactEmail";
 
 const dataSourceConfig = (): DataSourceOptions => {
   const dbUrl: string | undefined = process.env.DATABASE_URL;
@@ -29,7 +30,11 @@ const dataSourceConfig = (): DataSourceOptions => {
     url: dbUrl,
     synchronize: false,
     logging: true,
-    migrations: [createClient1679708074123, createContact1679767636330],
+    migrations: [
+      createClient1679708074123,
+      createContact1679767636330,
+      removeUniqueContactEmail1680263853100,
+    ],
     entities: [Client, Contact],
   };
 };
