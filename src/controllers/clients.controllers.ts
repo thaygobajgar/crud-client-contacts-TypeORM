@@ -52,7 +52,7 @@ const deleteClientController = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  await deleteClientService(req.params.id);
+  await deleteClientService(req.client.id);
   return res.status(204).json();
 };
 
@@ -61,7 +61,7 @@ const updateClientController = async (
   res: Response
 ): Promise<Response> => {
   const clientData: IClientUpdate = req.body;
-  const clientId: string = req.params.id;
+  const clientId: string = req.client.id;
   const updatedClient = await updateClientService(clientId, clientData);
   return res.status(200).json(updatedClient);
 };

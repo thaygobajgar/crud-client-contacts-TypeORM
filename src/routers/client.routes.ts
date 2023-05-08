@@ -27,19 +27,17 @@ clientRoutes.get(
 );
 
 clientRoutes.delete(
-  "/:id",
+  "/",
   ensureTokenIsValidMiddleware,
   ensureClientExistsMiddleware,
-  ensureIsOwnerOrAdminMiddleware,
   deleteClientController
 );
 
 clientRoutes.patch(
-  "/:id",
+  "/",
   ensureTokenIsValidMiddleware,
   ensureDataIsValidMiddleware(clientUpdateSchema),
   ensureClientExistsMiddleware,
-  ensureIsOwnerOrAdminMiddleware,
   updateClientController
 );
 
